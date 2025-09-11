@@ -6,3 +6,7 @@ app = FastAPI()
 # Include routers
 app.include_router(task.router)
 app.include_router(user.router)
+
+@app.get("/")
+def read_root():
+    return {"message": "FastAPI is running!"}
