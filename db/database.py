@@ -2,19 +2,20 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# Replace these with your PostgreSQL credentials
-DB_USER = "postgres"
-DB_PASSWORD = "password"
+# PostgreSQL credentials
+DB_USER = "postgres"           # change if you created a separate user
+DB_PASSWORD = "password"       # change to your password
 DB_HOST = "localhost"
 DB_PORT = "5432"
 DB_NAME = "gg_property"
 
-SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+# SQLAlchemy database URL
+SQLALCHEMY_DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 # Create database engine
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)  # echo=True shows SQL logs
 
-# Session
+# Create a configured "Session" class
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Base class for models
