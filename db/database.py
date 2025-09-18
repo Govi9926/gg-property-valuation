@@ -1,6 +1,15 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import psycopg2
+ 
+#declare the connection string specifying
+#the host name database name use name
+#and password
+conn_string = "host='localhost:5432' dbname='gg_property'\ user='postgres' password='password'"
+
+#use connect function to stablish the connection
+conn = psycopg2.connect(conn_string)
 
 # PostgreSQL credentials
 DB_USER = "postgres"           # change if you created a separate user
