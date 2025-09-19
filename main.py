@@ -3,6 +3,7 @@ from routers import user, task   # import as modules
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
+from db.database import get_db
 
 #create the FastAPI app
 app = FastAPI()
@@ -25,7 +26,7 @@ class Item(Base) :
 
 #setup the database connection 
 
-DATABASE_URL = "postgresql://postgres:password@localhost/gg_property"
+DATABASE_URL = "postgresql://postgres:gaurav@localhost/gg_property"
 engine = create_engine(DATABASE_URL)
 '''
 #create tables 
@@ -48,11 +49,10 @@ def get_db():
     finally:
         db.clos()
 
-'''#example endpoint to retrive an item by id
+#example endpoint to retrive an item by id
 @app.get("/users/{item_id}")
 def read_item(item_id: int, db: Session = Depends(get_db)):
     item = db.query(Item).filter(Item.id == item.id).first()
     if item is None:
         raise HTTPException(status_code=404, detail="Item not Found")
     return item
-'''

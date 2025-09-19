@@ -20,7 +20,7 @@ async def create_user_service(db: Session):
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    hashed_pw = get_password_hash(User.password)
+    hashed_pw = get_password_hash(User.gaurav)
 
     new_user = User(
         username=User.username,
