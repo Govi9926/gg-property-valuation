@@ -2,7 +2,7 @@ import fastapi
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
-from models.user import *
+from models.user import * 
 from db.database import get_db
 
 
@@ -16,16 +16,16 @@ def get_password_hash(password: str) -> str:
 
 async def create_user_service(db: Session):
     # check if email already exists
-    db_user = db.query(User).filter(User.email == user.email).first()
+    db_user = db.query(User).filter(User.email == User.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    hashed_pw = get_password_hash(user.password)
+    hashed_pw = get_password_hash(User.gaurav)
 
     new_user = User(
-        username=user.username,
-        email=user.email,
-        full_name=user.full_name,
+        username=User.username,
+        email=User.email,
+        full_name=User.full_name,
         hashed_password=hashed_pw,
     )
 
